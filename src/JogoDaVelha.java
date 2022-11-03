@@ -1,3 +1,4 @@
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class JogoDaVelha {
@@ -5,16 +6,13 @@ public class JogoDaVelha {
         Campo[][] tabuleiro = new Campo[3][3];
         Scanner scan = new Scanner(System.in);
         char simboloAtual = 'X'; //todo implementar um random aqui
-        String vitoria = "";
         boolean gameON = true;
 
         iniciarJogo(tabuleiro);
 
         while (gameON) {
             desenhaJogo(tabuleiro);
-            vitoria = verificarVitoria(tabuleiro);
-            if (!vitoria.equals("")) {
-                System.out.printf("Jogador %s venceu!%n", vitoria);
+            if (verificarVitoria(tabuleiro)) {
                 break;
             }
 
@@ -32,8 +30,9 @@ public class JogoDaVelha {
 
             limparTela();
 
-//            System.out.println("__FIM DO JOGO__");
         }
+
+
     }
 
     public static void iniciarJogo (Campo[][] jogo) {
@@ -81,10 +80,33 @@ public class JogoDaVelha {
         }
     }
 
-    public static String verificarVitoria (Campo[][] jogo) {
-        return "";
-        //todo implementar esse metodo (desafio)
-    }
+    public static boolean verificarVitoria (Campo[][] jogo) {
+        boolean resposta = false;
 
+        if (jogo[0][0].getSimbolo() == 'X' && jogo[0][1].getSimbolo() == 'X' && jogo[0][2].getSimbolo() == 'X' ||
+                jogo[1][0].getSimbolo() == 'X' && jogo[1][1].getSimbolo() == 'X' && jogo[1][2].getSimbolo() == 'X' ||
+                jogo[2][0].getSimbolo() == 'X' && jogo[2][1].getSimbolo() == 'X' && jogo[2][2].getSimbolo() == 'X' ||
+                jogo[0][0].getSimbolo() == 'X' && jogo[1][0].getSimbolo() == 'X' && jogo[2][0].getSimbolo() == 'X' ||
+                jogo[0][1].getSimbolo() == 'X' && jogo[1][1].getSimbolo() == 'X' && jogo[2][1].getSimbolo() == 'X' ||
+                jogo[0][2].getSimbolo() == 'X' && jogo[1][2].getSimbolo() == 'X' && jogo[2][2].getSimbolo() == 'X' ||
+                jogo[0][0].getSimbolo() == 'X' && jogo[1][1].getSimbolo() == 'X' && jogo[2][2].getSimbolo() == 'X' ||
+                jogo[0][2].getSimbolo() == 'X' && jogo[1][1].getSimbolo() == 'X' && jogo[2][0].getSimbolo() == 'X'){
+            System.out.printf("%n<< Vitória de %c >>%nJogo Encerrado!%n", 'X');
+            resposta = true;
+        }
+        else if (jogo[0][0].getSimbolo() == 'O' && jogo[0][1].getSimbolo() == 'O' && jogo[0][2].getSimbolo() == 'O' ||
+                jogo[1][0].getSimbolo() == 'O' && jogo[1][1].getSimbolo() == 'O' && jogo[1][2].getSimbolo() == 'O' ||
+                jogo[2][0].getSimbolo() == 'O' && jogo[2][1].getSimbolo() == 'O' && jogo[2][2].getSimbolo() == 'O' ||
+                jogo[0][0].getSimbolo() == 'O' && jogo[1][0].getSimbolo() == 'O' && jogo[2][0].getSimbolo() == 'O' ||
+                jogo[0][1].getSimbolo() == 'O' && jogo[1][1].getSimbolo() == 'O' && jogo[2][1].getSimbolo() == 'O' ||
+                jogo[0][2].getSimbolo() == 'O' && jogo[1][2].getSimbolo() == 'O' && jogo[2][2].getSimbolo() == 'O' ||
+                jogo[0][0].getSimbolo() == 'O' && jogo[1][1].getSimbolo() == 'O' && jogo[2][2].getSimbolo() == 'O' ||
+                jogo[0][2].getSimbolo() == 'O' && jogo[1][1].getSimbolo() == 'O' && jogo[2][0].getSimbolo() == 'O') {
+            System.out.printf("<< Vitória de %c >>%nJogo Encerrado!%n", 'O');
+            resposta = true;
+        }
+
+        return resposta;
+    }
     //todo: implementar um met pra qnd o tab for td preenchido e ninguem venceu pra encerrar o jogo
 }
